@@ -1,0 +1,13 @@
+.folder {
+    align-self: center;
+}
+
+.folder-name{
+    text-align: left;
+}
+
+img {
+    outline: 0;
+    max-width: 100%;
+    height: auto;
+}

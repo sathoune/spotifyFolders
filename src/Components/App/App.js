@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import hash from "../../hash";
 import "./App.css";
-import Login from "../Login/Login";
+import hash from "../../hash";
 import ajax from "../../ajax";
+import Login from "../Login/Login";
 import AlbumContainer from "../AlbumContainer/AlbumContainer";
 import AlbumFetchingPlaceholder from "../AlbumContainer/AlbumContainerPlaceholder";
 import FolderContainer from "../FolderContainer/FolderContainer";
@@ -51,26 +51,25 @@ class App extends Component {
 	}
 	
 	render() {
-		if (!this.state.token) {
+		if (this.state.token && this.state.albumProgress === 100) {
+			return (
+				<div className="App container">
+					<AlbumContainer albums={this.state.albums}/>
+					<FolderContainer/>
+				</div>
+			)
+		} else if (this.state.token && this.state.albumProgress !== 100) {
+			return (
+				<div className="App">
+					<AlbumFetchingPlaceholder fetched={this.state.albumProgress}/>
+				</div>
+			)
+		} else {
 			return (
 				<div className="App">
 					<Login/>
-				</div>)
-		} else {
-			if (this.state.albumProgress !== 100) {
-				return (
-					<div className="App">
-						<AlbumFetchingPlaceholder fetched={this.state.albumProgress}/>
-					</div>
-				)
-			} else {
-				return (
-					<div className="App container">
-						<AlbumContainer albums={this.state.albums}/>
-						<FolderContainer/>
-					</div>
-				)
-			}
+				</div>
+			)
 		}
 	}
 }

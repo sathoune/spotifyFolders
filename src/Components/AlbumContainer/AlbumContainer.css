@@ -2,26 +2,31 @@
     display: grid;
     grid-template-columns: auto;
 }
+
 @media screen and (min-width: 720px){
     .album-container {
-        grid-template-columns: 50% 50%;
+        grid-template-columns: 100%;
+        flex-grow: 1;
     }
 }
 
 @media screen and (min-width: 1080px){
     .album-container {
-        grid-template-columns: 33.33% 33.33% 33.33%;
+        grid-template-columns: 50% 50%;
+        flex-grow: 2;
     }
 }
 
 @media screen and (min-width: 1440px){
     .album-container {
-        grid-template-columns: 25% 25% 25% 25%;
+        grid-template-columns: 33.33% 33.33% 33.33%;
+        flex-grow: 3;
     }
 }
 
 @media screen and (min-width: 1800px){
     .album-container {
-        grid-template-columns: 20% 20% 20% 20% 20%;
+        grid-template-columns: 25% 25% 25% 25%;
+        flex-grow: 4;
     }
 }

@@ -1,13 +1,27 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Album from "../Album/Album";
 import "./AlbumContainer.css"
 
-const AlbumContainer = (props) => {
-	const createAlbum = (params) => <Album key={params.album.id} album={params.album}/>;
+class AlbumContainer extends Component {
+	constructor(props) {
+		super(props);
+		localStorage.setItem("myvar", "hi");
+	}
 	
-	return (<div className="album-container">
-		{props.albums.map(createAlbum)}
-	</div>)
+	componentDidMount() {
+		console.log(localStorage);
+	}
+	
+	createAlbum(params) {
+		return <Album key={params.album.id} album={params.album}/>;
+	}
+	
+	render() {
+		return (
+			<div className="album-container">
+				{this.props.albums.map(this.createAlbum)}
+			</div>)
+	}
 };
 
 export default AlbumContainer;
