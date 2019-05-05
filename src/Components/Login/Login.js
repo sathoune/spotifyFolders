@@ -1,5 +1,5 @@
 import React from "react";
-import {authEndpoint, clientId, redirectUri, scopes} from "./config";
+import {authEndpoint, clientId, redirectUri, scopes} from "../../config";
 
 const Login = () => {
 	const url = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
