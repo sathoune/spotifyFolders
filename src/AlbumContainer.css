@@ -1,0 +1,27 @@
+.album-container {
+    display: grid;
+    grid-template-columns: auto;
+}
+@media screen and (min-width: 720px){
+    .album-container {
+        grid-template-columns: 50% 50%;
+    }
+}
+
+@media screen and (min-width: 1080px){
+    .album-container {
+        grid-template-columns: 33.33% 33.33% 33.33%;
+    }
+}
+
+@media screen and (min-width: 1440px){
+    .album-container {
+        grid-template-columns: 25% 25% 25% 25%;
+    }
+}
+
+@media screen and (min-width: 1800px){
+    .album-container {
+        grid-template-columns: 20% 20% 20% 20% 20%;
+    }
+}

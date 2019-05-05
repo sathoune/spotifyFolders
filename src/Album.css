@@ -1,3 +1,13 @@
 .album {
-    border: 5px solid #61dafb;
+    align-self: center;
+}
+
+.album-name, .album-artist {
+    text-align: left;
+}
+
+img {
+    outline: 0;
+    max-width: 100%;
+    height: auto;
 }

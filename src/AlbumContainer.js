@@ -1,5 +1,6 @@
 import React from 'react';
 import Album from "./Album";
+import "./AlbumContainer.css"
 
 const AlbumContainer = (props) => {
 	const createAlbum = (params) => <Album key={params.album.id} album={params.album}/>;

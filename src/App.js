@@ -24,7 +24,7 @@ class App extends Component {
 		if (_token) this.setState({token: _token }, this.getAlbums);
 	}
 	
-	getAlbums(url="https://api.spotify.com/v1/me/albums"){
+	getAlbums(url="https://api.spotify.com/v1/me/albums?limit=50"){
 		const options = {
 			url: url,
 			method: "get",

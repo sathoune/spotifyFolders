@@ -3,11 +3,14 @@ import "./Album.css";
 
 const Album = (props) => {
 	return <div className="album">
-		<div>
-			Album: {props.album.name}
+		<a href={props.album.external_urls.spotify} target={"_blank"}>
+			<img src={props.album.images[1].url} />
+		</a>
+		<div className={"album-name"}>
+			<strong>{props.album.name}</strong>
 		</div>
-		<div>
-			Artist: {props.album.artists[0].name}
+		<div className={"album-artist"}>
+			{props.album.artists[0].name}
 		</div>
 	</div>
 };
