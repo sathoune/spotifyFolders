@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import hash from "./hash";
 import "./App.css";
-import {Login} from "./Login";
+import Login from "./Login";
 import {ajax} from "./ajax";
+import Album from "./Album";
 
 class App extends Component {
 	constructor() {
@@ -50,26 +51,24 @@ class App extends Component {
 		
 		return (
 			<div className="App">
-				<header className="App-header">
-					{(!this.state.token)
-						?
-						(<Login/>)
-						:
-						(<div>Hello General Kenobi
-							{(!this.state.albumsLoaded)
-								?
-								this.state.albums.length
-								:
-								(this.state.albums.map(
-									album => {
-										console.log(album);
-										return album.album.name
-									})
-								)
-							}
-						</div>)
-					}
-				</header>
+				{(!this.state.token)
+					?
+					(<Login/>)
+					:
+					(<div>Hello General Kenobi, I fetched
+						{(!this.state.albumsLoaded)
+							?
+							this.state.albums.length + " of your albums"
+							:
+							(this.state.albums.map(
+								album => {
+									console.log(album);
+									return <Album key={album.album.id} album={album.album}/>
+								})
+							)
+						}
+					</div>)
+				}
 			</div>
 		);
 	}

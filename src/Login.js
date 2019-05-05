@@ -1,7 +1,7 @@
 import React from "react";
 import {authEndpoint, clientId, redirectUri, scopes} from "./config";
 
-export const Login = () => {
+const Login = () => {
 	const url = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
 		"%20"
 	)}&response_type=token&show_dialog=true`;
@@ -12,3 +12,5 @@ export const Login = () => {
 			Login to Spotify
 		</a>)
 };
+
+export default Login;
