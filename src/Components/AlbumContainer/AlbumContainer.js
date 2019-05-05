@@ -5,7 +5,7 @@ import "./AlbumContainer.css"
 class AlbumContainer extends Component {
 	constructor(props) {
 		super(props);
-		localStorage.setItem("myvar", "hi");
+		//localStorage.setItem("myvar", "hi");
 	}
 	
 	componentDidMount() {

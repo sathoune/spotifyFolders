@@ -1,4 +1,4 @@
-const ajax = ({url, method, headers, callback}) => {
+export const ajax = ({url, method, headers, callback}) => {
 	const xhr = new XMLHttpRequest();
 	xhr.onload = function () { callback(JSON.parse(xhr.response)) };
 	xhr.open(method, url);
@@ -8,4 +8,8 @@ const ajax = ({url, method, headers, callback}) => {
 	xhr.send();
 };
 
-export default ajax;
+export const getFoldersFromLocalStorage = () => {
+	return (localStorage.hasOwnProperty("folders")) ? (
+		JSON.parse(localStorage.getItem("folders"))
+	) : ( null )
+};

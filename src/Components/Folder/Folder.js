@@ -3,9 +3,9 @@ import "./Folder.css";
 
 const Folder = (props) => {
 	return (
-		<div id={props.folder.id} className="folder">
+		<div className="folder">
 			<div className={"folder-name"}>
-				<strong>{props.folder.name}</strong>
+				<strong>{props.name}</strong>
 			</div>
 		</div>)
 };

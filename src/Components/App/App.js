@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import "./App.css";
 import hash from "../../hash";
-import ajax from "../../ajax";
+import {ajax} from "../../functions";
 import Login from "../Login/Login";
 import AlbumContainer from "../AlbumContainer/AlbumContainer";
 import AlbumFetchingPlaceholder from "../AlbumContainer/AlbumContainerPlaceholder";
