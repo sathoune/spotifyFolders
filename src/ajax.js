@@ -1,4 +1,4 @@
-export const ajax = ({url, method, headers, callback}) => {
+const ajax = ({url, method, headers, callback}) => {
 	console.log();
 	const xhr = new XMLHttpRequest();
 	xhr.onload = function () {
@@ -10,3 +10,5 @@ export const ajax = ({url, method, headers, callback}) => {
 	}
 	xhr.send();
 };
+
+export default ajax;

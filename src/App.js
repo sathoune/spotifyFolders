@@ -2,8 +2,9 @@ import React, {Component} from "react";
 import hash from "./hash";
 import "./App.css";
 import Login from "./Login";
-import {ajax} from "./ajax";
-import Album from "./Album";
+import ajax from "./ajax";
+import AlbumContainer from "./AlbumContainer";
+import AlbumFetchingPlaceholder from "./AlbumFetchingPlaceholder";
 
 class App extends Component {
 	constructor() {
@@ -11,7 +12,7 @@ class App extends Component {
 		this.state = {
 			token: null,
 			albums: [],
-			albumsLoaded: false,
+			totalAlbums: 0,
 		};
 		this.getAlbums = this.getAlbums.bind(this);
 	}
@@ -37,7 +38,10 @@ class App extends Component {
 			callback: (data) => {
 				this.setState(
 					prev => {
-						return {albums: prev.albums.concat(data.items)}
+						return {
+							totalAlbums: data.total,
+							albums: prev.albums.concat(data.items)
+						}
 					}
 				);
 				if (data.next) this.getAlbums(data.next);
@@ -55,19 +59,14 @@ class App extends Component {
 					?
 					(<Login/>)
 					:
-					(<div>Hello General Kenobi, I fetched
-						{(!this.state.albumsLoaded)
+					(
+						(this.state.totalAlbums - this.state.albums.length > 0)
 							?
-							this.state.albums.length + " of your albums"
+							<AlbumFetchingPlaceholder fetched={this.state.albums.length/this.state.totalAlbums}/>
 							:
-							(this.state.albums.map(
-								album => {
-									console.log(album);
-									return <Album key={album.album.id} album={album.album}/>
-								})
-							)
-						}
-					</div>)
+							<AlbumContainer albums={this.state.albums}/>
+						
+					)
 				}
 			</div>
 		);
