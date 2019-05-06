@@ -8,7 +8,8 @@ const Folder = (props) => {
 				<strong>{props.name}</strong>
 			</div>
 			<button onClick={props.removeFolder}>Remove me!</button>
-		</div>)
+		</div>
+	)
 };
 
 export default Folder;

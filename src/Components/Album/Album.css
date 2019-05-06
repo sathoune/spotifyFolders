@@ -6,6 +6,10 @@
     text-align: left;
 }
 
+.album-add-to-folder {
+    float: right;
+}
+
 img {
     outline: 0;
     max-width: 100%;

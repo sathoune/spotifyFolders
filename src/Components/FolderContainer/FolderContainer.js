@@ -23,25 +23,30 @@ class FolderContainer extends Component {
 	
 	createFolder() {
 		const nameInput = document.getElementById("new-folder-name");
-		const folder = {
-			id: nameInput.value.replace(" ", "-"),
-			name: nameInput.value,
-			albums: [],
-		};
+		const name = nameInput.value.trim();
 		nameInput.value = "";
-		if (localStorage.hasOwnProperty("folders")) {
-			
-			const folders = this.state.folders;
-			const names = folders.map(each => each.name);
-			if (names.indexOf(folder.name) === -1) {
-				folders.push(folder);
-				setFoldersToLocalStorage(folders);
-				this.setState({folders: folders});
-			} else console.log("folder with given name already exists");
-			
+		if(name === ""){
+			console.log("No name provided")
 		} else {
-			setFoldersToLocalStorage([folder])
-			this.setState({folders: [folder]});
+			const folder = {
+				id: name.replace(" ", "-"),
+				name: name,
+				albums: [],
+			};
+			if (localStorage.hasOwnProperty("folders")) {
+				
+				const folders = this.state.folders;
+				const names = folders.map(each => each.name);
+				if (names.indexOf(folder.name) === -1) {
+					folders.push(folder);
+					setFoldersToLocalStorage(folders);
+					this.setState({folders: folders});
+				} else console.log("folder with given name already exists");
+				
+			} else {
+				setFoldersToLocalStorage([folder])
+				this.setState({folders: [folder]});
+			}
 		}
 	}
 	
