@@ -13,3 +13,7 @@ export const getFoldersFromLocalStorage = () => {
 		JSON.parse(localStorage.getItem("folders"))
 	) : ( null )
 };
+
+export const setFoldersToLocalStorage = (foldersArray) => {
+	localStorage.setItem("folders", JSON.stringify(foldersArray));
+};

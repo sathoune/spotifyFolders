@@ -3,10 +3,11 @@ import "./Folder.css";
 
 const Folder = (props) => {
 	return (
-		<div className="folder">
+		<div id={`folder-${props.id}`} className="folder">
 			<div className={"folder-name"}>
 				<strong>{props.name}</strong>
 			</div>
+			<button onClick={props.removeFolder}>Remove me!</button>
 		</div>)
 };
 

@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import "./FolderContainer.css"
 import Folder from "../Folder/Folder";
-import {getFoldersFromLocalStorage} from "../../functions";
+import {getFoldersFromLocalStorage, setFoldersToLocalStorage} from "../../functions";
+import FolderCreator from "../FolderCreator/FolderCreator";
 
 class FolderContainer extends Component {
 	constructor(props) {
 		super(props);
-		
 		const folders = getFoldersFromLocalStorage();
-		if(folders){
+		if (folders) {
 			this.state = {
-				folders: getFoldersFromLocalStorage()
+				folders: folders
 			}
 		} else {
 			this.state = {
@@ -18,49 +18,48 @@ class FolderContainer extends Component {
 			}
 		}
 		this.createFolder = this.createFolder.bind(this);
+		this.removeFolder = this.removeFolder.bind(this);
 	}
 	
 	createFolder() {
 		const nameInput = document.getElementById("new-folder-name");
 		const folder = {
-			id: 0,
+			id: nameInput.value.replace(" ", "-"),
 			name: nameInput.value,
 			albums: [],
 		};
 		nameInput.value = "";
 		if (localStorage.hasOwnProperty("folders")) {
 			
-			const folders = getFoldersFromLocalStorage();
+			const folders = this.state.folders;
 			const names = folders.map(each => each.name);
 			if (names.indexOf(folder.name) === -1) {
-				folder.id = folders.length;
 				folders.push(folder);
-				localStorage.setItem("folders", JSON.stringify(folders));
+				setFoldersToLocalStorage(folders);
 				this.setState({folders: folders});
 			} else console.log("folder with given name already exists");
 			
 		} else {
-			localStorage.setItem("folders", (JSON.stringify([folder])));
+			setFoldersToLocalStorage([folder])
+			this.setState({folders: [folder]});
 		}
-		
-		
+	}
+	
+	removeFolder(e) {
+		const id = (e.target.parentElement.id.replace("folder-", ""));
+		const folders = this.state.folders.filter( folder => folder.id !== id);
+		setFoldersToLocalStorage(folders);
+		this.setState({folders: folders});
 	}
 	
 	render() {
 		return (
 			<div className="folder-container">
-				<header>
-					<input id={"new-folder-name"} type={"text"} placeholder={"folder name"}/>
-					<button onClick={this.createFolder}>
-						Create folder
-					</button>
-				</header>
+				<FolderCreator createFolder={this.createFolder}/>
 				<div id={"folders"}>
 					{(this.state.folders !== []) ? (
 						this.state.folders.map(folder => {
-							{
-								return <Folder key={folder.id} name={folder.name}/>
-							}
+							return <Folder key={folder.id} id={folder.id} removeFolder={this.removeFolder} name={folder.name}/>
 						})
 					) : (
 						<div>No fodlers yet!</div>
