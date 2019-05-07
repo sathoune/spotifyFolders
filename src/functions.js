@@ -11,9 +11,24 @@ export const ajax = ({url, method, headers, callback}) => {
 export const getFoldersFromLocalStorage = () => {
 	return (localStorage.hasOwnProperty("folders")) ? (
 		JSON.parse(localStorage.getItem("folders"))
-	) : ( null )
+	) : (
+		(function(){
+			localStorage.setItem("folders", JSON.stringify([]));
+			return [];
+		})()
+	)
 };
 
 export const setFoldersToLocalStorage = (foldersArray) => {
 	localStorage.setItem("folders", JSON.stringify(foldersArray));
+};
+
+export const mapAlbumData = (album) => {
+	return {
+		name: album.album.name,
+		id: album.album.id,
+		artist: album.album.artists[0].name,
+		url: album.album.external_urls.spotify,
+		img: album.album.images[1].url
+	}
 };

@@ -1,22 +1,16 @@
 import React, {Component} from 'react';
 import "./FolderContainer.css"
 import Folder from "../Folder/Folder";
-import {getFoldersFromLocalStorage, setFoldersToLocalStorage} from "../../functions";
+import {setFoldersToLocalStorage} from "../../functions";
 import FolderCreator from "../FolderCreator/FolderCreator";
 
 class FolderContainer extends Component {
 	constructor(props) {
 		super(props);
-		const folders = getFoldersFromLocalStorage();
-		if (folders) {
-			this.state = {
-				folders: folders
-			}
-		} else {
-			this.state = {
-				folders: []
-			}
-		}
+		this.state = {
+			folders: props.folders
+		};
+		
 		this.createFolder = this.createFolder.bind(this);
 		this.removeFolder = this.removeFolder.bind(this);
 	}
@@ -25,8 +19,8 @@ class FolderContainer extends Component {
 		const nameInput = document.getElementById("new-folder-name");
 		const name = nameInput.value.trim();
 		nameInput.value = "";
-		if(name === ""){
-			console.log("No name provided")
+		if (name === "") {
+			console.log("No name provided");
 		} else {
 			const folder = {
 				id: name.replace(" ", "-"),
@@ -52,7 +46,7 @@ class FolderContainer extends Component {
 	
 	removeFolder(e) {
 		const id = (e.target.parentElement.id.replace("folder-", ""));
-		const folders = this.state.folders.filter( folder => folder.id !== id);
+		const folders = this.state.folders.filter(folder => folder.id !== id);
 		setFoldersToLocalStorage(folders);
 		this.setState({folders: folders});
 	}
@@ -64,7 +58,8 @@ class FolderContainer extends Component {
 				<div id={"folders"}>
 					{(this.state.folders !== []) ? (
 						this.state.folders.map(folder => {
-							return <Folder key={folder.id} id={folder.id} removeFolder={this.removeFolder} name={folder.name}/>
+							return <Folder key={folder.id} id={folder.id} removeFolder={this.removeFolder}
+							               name={folder.name}/>
 						})
 					) : (
 						<div>No fodlers yet!</div>

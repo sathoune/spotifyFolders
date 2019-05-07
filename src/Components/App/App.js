@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import "./App.css";
 import hash from "../../hash";
-import {ajax} from "../../functions";
+import {ajax, getFoldersFromLocalStorage, mapAlbumData} from "../../functions";
 import Login from "../Login/Login";
 import AlbumContainer from "../AlbumContainer/AlbumContainer";
 import AlbumFetchingPlaceholder from "../AlbumContainer/AlbumContainerPlaceholder";
@@ -14,10 +14,17 @@ class App extends Component {
 			token: null,
 			albums: [],
 			albumProgress: 0,
+			folders: getFoldersFromLocalStorage()
 		};
 		
 		this.getAlbums = this.getAlbums.bind(this);
 		this.getAlbumsCallback = this.getAlbumsCallback.bind(this);
+		this.setFolders = this.setFolders.bind(this);
+	}
+	
+	setFolders(folders){
+		this.setState({folders: folders});
+		localStorage.setItem("folders", JSON.stringify(folders));
 	}
 	
 	componentDidMount() {
@@ -39,7 +46,8 @@ class App extends Component {
 	
 	getAlbumsCallback(data) {
 		this.setState(prev => {
-			const albums = prev.albums.concat(data.items);
+			const albumData = data.items.map(mapAlbumData);
+			const albums = prev.albums.concat(albumData);
 			const progress = Math.round(10000 * albums.length / data.total) / 100;
 			return {
 				albumProgress: progress,
@@ -54,8 +62,8 @@ class App extends Component {
 		if (this.state.token && this.state.albumProgress === 100) {
 			return (
 				<div className="App container">
-					<AlbumContainer albums={this.state.albums}/>
-					<FolderContainer/>
+					<AlbumContainer albums={this.state.albums} folders={this.state.folders}/>
+					<FolderContainer folders={this.state.folders}/>
 				</div>
 			)
 		} else if (this.state.token && this.state.albumProgress !== 100) {
