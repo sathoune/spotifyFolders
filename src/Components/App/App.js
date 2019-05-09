@@ -1,19 +1,18 @@
 import React, {Component} from "react";
 import "./App.css";
-import hash from "../../hash";
-import {getFoldersFromLocalStorage, mapAlbumData} from "../../functions";
+import {mapAlbumData} from "../../functions";
 import Login from "../Login/Login";
 import AlbumContainer from "../AlbumContainer/AlbumContainer";
 import AlbumFetchingPlaceholder from "../AlbumContainer/AlbumContainerPlaceholder";
 import FolderContainer from "../FolderContainer/FolderContainer";
 import {fetchFolders} from "../../redux/actions/folderActions";
 import {connect} from "react-redux";
+import {getToken} from "../../redux/actions/appActions";
 
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			token: null,
 			albums: [],
 			albumProgress: 0,
 		};
@@ -29,15 +28,20 @@ class App extends Component {
 	}
 	
 	componentDidMount() {
-		const _token = hash.access_token;
-		if (_token) this.setState({token: _token}, this.getAlbums);
+		this.props.getToken();
+		setTimeout( () => {
+			if(this.props.token){
+				this.getAlbums();
+			}
+		}, 1000);
 	}
 	
 	getAlbums(url = "https://api.spotify.com/v1/me/albums?limit=50") {
+		console.log('getin')
 		const options = {
 			method: "get",
 			headers: {
-				"Authorization": "Bearer " + this.state.token
+				"Authorization": "Bearer " + this.props.token
 			}
 		};
 		fetch(url, options).then( data => {
@@ -62,14 +66,14 @@ class App extends Component {
 	}
 	
 	render() {
-		if (this.state.token && this.state.albumProgress === 100) {
+		if (this.props.token && this.state.albumProgress === 100) {
 			return (
 				<div className="App container">
 					<AlbumContainer albums={this.state.albums} folders={this.state.folders}/>
 					<FolderContainer />
 				</div>
 			)
-		} else if (this.state.token && this.state.albumProgress !== 100) {
+		} else if (this.props.token && this.state.albumProgress !== 100) {
 			return (
 				<div className="App">
 					<AlbumFetchingPlaceholder fetched={this.state.albumProgress}/>
@@ -85,5 +89,8 @@ class App extends Component {
 	}
 }
 
+const mapStateToProps = (state) => ({
+	token: state.app.token
+});
 
-export default connect(null, {fetchFolders})(App);
+export default connect(mapStateToProps, {fetchFolders, getToken})(App);
