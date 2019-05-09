@@ -1,9 +1,11 @@
 export const ajax = ({url, method, headers, callback}) => {
 	const xhr = new XMLHttpRequest();
-	xhr.onload = function () { callback(JSON.parse(xhr.response)) };
+	xhr.onload = function () {
+		callback(JSON.parse(xhr.response))
+	};
 	xhr.open(method, url);
-	for(let key in headers){
-		if(headers.hasOwnProperty(key)) xhr.setRequestHeader(key, headers[key])
+	for (let key in headers) {
+		if (headers.hasOwnProperty(key)) xhr.setRequestHeader(key, headers[key])
 	}
 	xhr.send();
 };
@@ -12,7 +14,7 @@ export const getFoldersFromLocalStorage = () => {
 	return (localStorage.hasOwnProperty("folders")) ? (
 		JSON.parse(localStorage.getItem("folders"))
 	) : (
-		(function(){
+		(function () {
 			localStorage.setItem("folders", JSON.stringify([]));
 			return [];
 		})()
@@ -23,10 +25,31 @@ export const setFoldersToLocalStorage = (foldersArray) => {
 	localStorage.setItem("folders", JSON.stringify(foldersArray));
 };
 
-export const addFolderToLocalStorage = (newFolder) => {
-	const folders = getFoldersFromLocalStorage();
-	folders.unshift(newFolder);
-	setFoldersToLocalStorage(folders);
+export const addFolderToLocalStorage = (folderCandidate) => {
+	if (folderCandidate === "") {
+		return {err: "No name provided", code: 400}
+	} else {
+		const folders = getFoldersFromLocalStorage();
+		const names = folders.map(each => each.name);
+		if (names.indexOf(folderCandidate) === -1) {
+			const newFolder = {
+				id: folderCandidate,
+				name: folderCandidate,
+				albums: []
+			};
+			folders.unshift(newFolder);
+			setFoldersToLocalStorage(folders);
+			return {
+				code: 201,
+				body: newFolder
+			}
+		} else {
+			return {
+				code: 400,
+				err: "Folder with given name already exists"
+			}
+		}
+	}
 };
 
 export const mapAlbumData = (album) => {
