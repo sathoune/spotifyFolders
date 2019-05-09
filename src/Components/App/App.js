@@ -1,12 +1,12 @@
 import React, {Component} from "react";
 import "./App.css";
 import hash from "../../hash";
-import {ajax, getFoldersFromLocalStorage, mapAlbumData} from "../../functions";
+import {getFoldersFromLocalStorage, mapAlbumData} from "../../functions";
 import Login from "../Login/Login";
 import AlbumContainer from "../AlbumContainer/AlbumContainer";
 import AlbumFetchingPlaceholder from "../AlbumContainer/AlbumContainerPlaceholder";
 import FolderContainer from "../FolderContainer/FolderContainer";
-import {fetchFolders} from "../../redux/actions";
+import {fetchFolders} from "../../redux/actions/folderActions";
 import {connect} from "react-redux";
 
 class App extends Component {
@@ -16,7 +16,6 @@ class App extends Component {
 			token: null,
 			albums: [],
 			albumProgress: 0,
-			//folders: getFoldersFromLocalStorage()
 		};
 		this.props.fetchFolders();
 		this.getAlbums = this.getAlbums.bind(this);
@@ -36,14 +35,16 @@ class App extends Component {
 	
 	getAlbums(url = "https://api.spotify.com/v1/me/albums?limit=50") {
 		const options = {
-			url: url,
 			method: "get",
 			headers: {
 				"Authorization": "Bearer " + this.state.token
-			},
-			callback: this.getAlbumsCallback
+			}
 		};
-		ajax(options);
+		fetch(url, options).then( data => {
+			return data.json();
+		}).then( parsedData => {
+			this.getAlbumsCallback(parsedData);
+		})
 	}
 	
 	getAlbumsCallback(data) {
@@ -65,7 +66,7 @@ class App extends Component {
 			return (
 				<div className="App container">
 					<AlbumContainer albums={this.state.albums} folders={this.state.folders}/>
-					<FolderContainer folders={this.state.folders}/>
+					<FolderContainer />
 				</div>
 			)
 		} else if (this.state.token && this.state.albumProgress !== 100) {

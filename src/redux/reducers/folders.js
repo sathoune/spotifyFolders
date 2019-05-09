@@ -1,4 +1,4 @@
-import {ADD_FOLDER, FETCH_FOLDERS, REMOVE_FOLDER} from "../actionTypes";
+import {ADD_FOLDER, FETCH_FOLDERS, REMOVE_FOLDER} from "../actions/actionTypes";
 
 export const initialState = {
 	folders: []

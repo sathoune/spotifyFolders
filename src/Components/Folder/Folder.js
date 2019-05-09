@@ -1,7 +1,7 @@
 import React from "react";
 import "./Folder.css";
 import {connect} from "react-redux";
-import {removeFolder} from "../../redux/actions";
+import {removeFolder} from "../../redux/actions/folderActions";
 
 const Folder = (props) => {
 	

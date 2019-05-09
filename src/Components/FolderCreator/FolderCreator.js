@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import "./FolderCreator.css";
 import {connect} from "react-redux";
-import {addFolder} from "../../redux/actions";
+import {addFolder} from "../../redux/actions/folderActions";
 
 const FolderCreator = (props) => {
 	const [input, setInput] = useState("");

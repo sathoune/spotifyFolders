@@ -1,5 +1,5 @@
 import {ADD_FOLDER, REMOVE_FOLDER, FETCH_FOLDERS, ERROR} from "./actionTypes";
-import {addFolderToLocalStorage, getFoldersFromLocalStorage, setFoldersToLocalStorage} from "../functions";
+import {addFolderToLocalStorage, getFoldersFromLocalStorage, setFoldersToLocalStorage} from "../../functions";
 
 export const addFolder = (folder) => dispatch => {
 	

@@ -1,4 +1,4 @@
-import {ERROR} from "../actionTypes";
+import {ERROR} from "../actions/actionTypes";
 
 export const initialState = {
 
