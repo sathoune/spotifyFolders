@@ -7,7 +7,10 @@ export const inistialState = {
 export const albumReducer = (state=inistialState, action) => {
 	switch(action.type){
 		case FETCH_ALBUMS: {
-			return state;
+			return {
+				...state,
+				albums: [...action.payload, ...state.albums]
+			};
 		}
 		default: {
 			return state;

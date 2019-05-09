@@ -8,6 +8,7 @@ import FolderContainer from "../FolderContainer/FolderContainer";
 import {fetchFolders} from "../../redux/actions/folderActions";
 import {connect} from "react-redux";
 import {getToken} from "../../redux/actions/appActions";
+import {fetchAlbums} from "../../redux/actions/albumActions";
 
 class App extends Component {
 	constructor(props) {
@@ -31,13 +32,13 @@ class App extends Component {
 		this.props.getToken();
 		setTimeout( () => {
 			if(this.props.token){
-				this.getAlbums();
+				this.props.fetchAlbums({token: this.props.token});
 			}
 		}, 1000);
 	}
 	
 	getAlbums(url = "https://api.spotify.com/v1/me/albums?limit=50") {
-		console.log('getin')
+		console.log('getin');
 		const options = {
 			method: "get",
 			headers: {
@@ -93,4 +94,4 @@ const mapStateToProps = (state) => ({
 	token: state.app.token
 });
 
-export default connect(mapStateToProps, {fetchFolders, getToken})(App);
+export default connect(mapStateToProps, {fetchFolders, getToken, fetchAlbums})(App);
