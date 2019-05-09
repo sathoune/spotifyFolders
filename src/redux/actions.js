@@ -1,5 +1,5 @@
 import {ADD_FOLDER, REMOVE_FOLDER, FETCH_FOLDERS, ERROR} from "./actionTypes";
-import {addFolderToLocalStorage, getFoldersFromLocalStorage} from "../functions";
+import {addFolderToLocalStorage, getFoldersFromLocalStorage, setFoldersToLocalStorage} from "../functions";
 
 export const addFolder = (folder) => dispatch => {
 	
@@ -12,12 +12,17 @@ export const addFolder = (folder) => dispatch => {
 				folder: result.body
 			}
 		})
-	} else {
+	} else if (result.code >= 400 && result.code < 500) {
 		console.log(result.err);
 		dispatch({
 			type: ERROR,
 			payload: result.err
 		});
+	} else {
+		dispatch({
+			type: ERROR,
+			payload: "Unknown code"
+		})
 	}
 };
 
@@ -29,11 +34,15 @@ export const fetchFolders = () => dispatch => {
 	})
 };
 
-export const removeFolder = folder => dispatch => (
+export const removeFolder = folderId => dispatch => {
+	const folders = getFoldersFromLocalStorage();
+	const filteredFolders = folders.filter(folder => folder.id !== folderId)
+	setFoldersToLocalStorage(filteredFolders);
+	
 	dispatch({
 		type: REMOVE_FOLDER,
 		payload: {
-			folder
+			folders: filteredFolders
 		}
 	})
-);
+};
