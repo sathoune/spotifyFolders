@@ -6,6 +6,8 @@ import Login from "../Login/Login";
 import AlbumContainer from "../AlbumContainer/AlbumContainer";
 import AlbumFetchingPlaceholder from "../AlbumContainer/AlbumContainerPlaceholder";
 import FolderContainer from "../FolderContainer/FolderContainer";
+import {fetchFolders} from "../../redux/actions";
+import {connect} from "react-redux";
 
 class App extends Component {
 	constructor(props) {
@@ -16,7 +18,7 @@ class App extends Component {
 			albumProgress: 0,
 			//folders: getFoldersFromLocalStorage()
 		};
-		
+		this.props.fetchFolders();
 		this.getAlbums = this.getAlbums.bind(this);
 		this.getAlbumsCallback = this.getAlbumsCallback.bind(this);
 		this.setFolders = this.setFolders.bind(this);
@@ -82,4 +84,5 @@ class App extends Component {
 	}
 }
 
-export default App;
+
+export default connect(null, {fetchFolders})(App);

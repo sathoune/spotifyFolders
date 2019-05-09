@@ -1,4 +1,4 @@
-import {ADD_FOLDER} from "../actionTypes";
+import {ADD_FOLDER, FETCH_FOLDERS} from "../actionTypes";
 
 export const initialState = {
 	folders: []
@@ -14,6 +14,12 @@ export const folderReducer = (state=initialState, action) => {
 			return {...state,
 				folders: [action.payload.folder, ...state.folders]
 			};
+		}
+		case FETCH_FOLDERS: {
+			return {
+				...state,
+				folders: [...action.payload, ...state.folders]
+			}
 		}
 		default: {
 			return state;

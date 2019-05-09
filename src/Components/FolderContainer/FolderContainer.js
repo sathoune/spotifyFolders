@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
+import React from 'react';
 import "./FolderContainer.css"
 import Folder from "../Folder/Folder";
 import {setFoldersToLocalStorage} from "../../functions";
 import FolderCreator from "../FolderCreator/FolderCreator";
 import {connect} from "react-redux";
+import {fetchFolders} from "../../redux/actions";
 
-class FolderContainer extends Component {
+const FolderContainer = props => {
 	// constructor(props) {
 	// 	super(props);
 	// 	this.state = {
@@ -51,27 +52,20 @@ class FolderContainer extends Component {
 	// 	setFoldersToLocalStorage(folders);
 	// 	this.setState({folders: folders});
 	// }
-
-	render() {
-		return (
-			<div className="folder-container">
-				<FolderCreator/>
-				<div id={"folders"}>
-					{this.props.folders.map((folder, index) => {
-						return <div key={"folder"+index}>{folder}</div>
-						}
-					)}
-				</div>
-			</div>)
-	}
-}
-
-const mapStateToProps = (state) => {
-	console.log('mapping state to props');
-	console.log(state);
-	return {
-		folders: state.folders.folders
-	};
+	return (
+		<div className="folder-container">
+			<FolderCreator/>
+			<div id={"folders"}>
+				{props.folders.map((folder, index) => {
+						return <div key={"folder" + index}>{folder}</div>
+					}
+				)}
+			</div>
+		</div>)
 };
+
+const mapStateToProps = (state) => ({
+	folders: state.folders.folders
+});
 
 export default connect(mapStateToProps)(FolderContainer)
