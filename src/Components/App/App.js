@@ -14,7 +14,7 @@ class App extends Component {
 			token: null,
 			albums: [],
 			albumProgress: 0,
-			folders: getFoldersFromLocalStorage()
+			//folders: getFoldersFromLocalStorage()
 		};
 		
 		this.getAlbums = this.getAlbums.bind(this);

@@ -15,10 +15,10 @@ const Album = (props) => {
 		</div>
 		<div className={"album-add-to-folder"}>
 			<button>Add to</button>
-			<select>
-				<option key={"empty"}></option>
-				{props.folders.map(folder => <option key={`option-${folder.name}`}>{folder.name}</option>)}
-			</select>
+			{/*<select>*/}
+			{/*	<option key={"empty"}></option>*/}
+			{/*	{props.folders.map(folder => <option key={`option-${folder.name}`}>{folder.name}</option>)}*/}
+			{/*</select>*/}
 		</div>
 	</div>
 };
