@@ -23,6 +23,12 @@ export const setFoldersToLocalStorage = (foldersArray) => {
 	localStorage.setItem("folders", JSON.stringify(foldersArray));
 };
 
+export const addFolderToLocalStorage = (newFolder) => {
+	const folders = getFoldersFromLocalStorage();
+	folders.unshift(newFolder);
+	setFoldersToLocalStorage(folders);
+};
+
 export const mapAlbumData = (album) => {
 	return {
 		name: album.album.name,

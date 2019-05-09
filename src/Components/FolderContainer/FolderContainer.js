@@ -56,8 +56,8 @@ const FolderContainer = props => {
 		<div className="folder-container">
 			<FolderCreator/>
 			<div id={"folders"}>
-				{props.folders.map((folder, index) => {
-						return <div key={"folder" + index}>{folder}</div>
+				{props.folders.map((folder) => {
+						return <div key={"folder" + folder.id}>{folder.name}</div>
 					}
 				)}
 			</div>

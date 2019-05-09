@@ -14,7 +14,6 @@ const FolderCreator = (props) => {
 	
 	return (
 		<header id={"folder-creator"}>
-			{input}
 			<input
 				id={"new-folder-name"}
 				onChange={handleInputChange}

@@ -1,19 +1,27 @@
 import {ADD_FOLDER, REMOVE_FOLDER, FETCH_FOLDERS} from "./actionTypes";
+import {addFolderToLocalStorage, getFoldersFromLocalStorage} from "../functions";
 
 export const addFolder = (folder) => dispatch => {
+	const newFolder = {
+		id: folder,
+		name: folder,
+		albums: []
+	};
+	addFolderToLocalStorage(newFolder);
+	
 	dispatch({
 		type: ADD_FOLDER,
 		payload: {
-			folder
+			folder: newFolder
 		}
 	})
 };
 
 export const fetchFolders = () => dispatch => {
-	const folderString = localStorage.folders;
+	const folders = getFoldersFromLocalStorage();
 	dispatch({
 		type: FETCH_FOLDERS,
-		payload: JSON.stringify(folderString)
+		payload: folders
 	})
 };
 
