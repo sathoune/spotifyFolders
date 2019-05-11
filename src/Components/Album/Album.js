@@ -1,8 +1,8 @@
 import React from "react";
 import "./Album.css";
+import {connect} from 'react-redux';
 
 const Album = (props) => {
-	
 	return <div id={props.album.id} className="album">
 		<a href={props.album.url} target={"_blank"}>
 			<img alt="" src={props.album.img} />
@@ -15,12 +15,12 @@ const Album = (props) => {
 		</div>
 		<div className={"album-add-to-folder"}>
 			<button>Add to</button>
-			{/*<select>*/}
-			{/*	<option key={"empty"}></option>*/}
-			{/*	{props.folders.map(folder => <option key={`option-${folder.name}`}>{folder.name}</option>)}*/}
-			{/*</select>*/}
+			{props.folders}
 		</div>
 	</div>
 };
 
-export default Album;
+
+
+export default connect()(Album);
+

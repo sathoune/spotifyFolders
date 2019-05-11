@@ -1,11 +1,10 @@
-import {ADD_FOLDER, FETCH_FOLDERS, REMOVE_FOLDER} from "../actions/actionTypes";
+import {ADD_FOLDER, FETCH_FOLDERS, REMOVE_FOLDER, ADD_ALBUM_TO_FOLDER} from "../actions/actionTypes";
 
 export const initialState = {
 	folders: []
 };
 
 export const folderReducer = (state=initialState, action) => {
-	console.log('reducing state');
 	switch(action.type) {
 		case ADD_FOLDER: {
 			return {...state,
@@ -24,9 +23,13 @@ export const folderReducer = (state=initialState, action) => {
 				folders: [...action.payload.folders]
 			}
 		}
-		
-		default: {
-			return state;
+		case ADD_ALBUM_TO_FOLDER : {
+			return {
+				...state
+			}
 		}
+		
+		
+		default: return state;
 	}
 };

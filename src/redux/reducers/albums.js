@@ -1,10 +1,11 @@
 import {FETCH_ALBUMS} from "../actions/actionTypes";
 
-export const inistialState = {
-	albums: []
+export const initialState = {
+	albums: [],
+	albumProgress: 0
 };
 
-export const albumReducer = (state=inistialState, action) => {
+export const albumReducer = (state=initialState, action) => {
 	switch(action.type){
 		case FETCH_ALBUMS: {
 			return {
@@ -13,8 +14,6 @@ export const albumReducer = (state=inistialState, action) => {
 				albumProgress: action.albumProgress
 			};
 		}
-		default: {
-			return state;
-		}
+		default: return state;
 	}
 };
