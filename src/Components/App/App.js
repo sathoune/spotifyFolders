@@ -23,15 +23,15 @@ class App extends Component {
 		this.setFolders = this.setFolders.bind(this);
 	}
 	
-	setFolders(folders){
+	setFolders(folders) {
 		this.setState({folders: folders});
 		localStorage.setItem("folders", JSON.stringify(folders));
 	}
 	
 	componentDidMount() {
 		this.props.getToken();
-		setTimeout( () => {
-			if(this.props.token){
+		setTimeout(() => {
+			if (this.props.token) {
 				this.props.fetchAlbums({token: this.props.token});
 			}
 		}, 1000);
@@ -45,9 +45,9 @@ class App extends Component {
 				"Authorization": "Bearer " + this.props.token
 			}
 		};
-		fetch(url, options).then( data => {
+		fetch(url, options).then(data => {
 			return data.json();
-		}).then( parsedData => {
+		}).then(parsedData => {
 			this.getAlbumsCallback(parsedData);
 		})
 	}
@@ -67,17 +67,17 @@ class App extends Component {
 	}
 	
 	render() {
-		if (this.props.token && this.state.albumProgress === 100) {
+		if (this.props.token && this.props.albumProgress === 100) {
 			return (
 				<div className="App container">
-					<AlbumContainer albums={this.state.albums} folders={this.state.folders}/>
-					<FolderContainer />
+					<AlbumContainer albums={this.props.albums} folders={this.state.folders}/>
+					<FolderContainer/>
 				</div>
 			)
-		} else if (this.props.token && this.state.albumProgress !== 100) {
+		} else if (this.props.token && this.props.albumProgress !== 100) {
 			return (
 				<div className="App">
-					<AlbumFetchingPlaceholder fetched={this.state.albumProgress}/>
+					<AlbumFetchingPlaceholder fetched={this.props.albumProgress}/>
 				</div>
 			)
 		} else {
@@ -91,7 +91,9 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	token: state.app.token
+	token: state.app.token,
+	albums: state.albums.albums,
+	albumProgress: state.albums.albumProgress
 });
 
 export default connect(mapStateToProps, {fetchFolders, getToken, fetchAlbums})(App);

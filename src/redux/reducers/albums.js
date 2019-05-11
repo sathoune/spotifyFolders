@@ -9,7 +9,8 @@ export const albumReducer = (state=inistialState, action) => {
 		case FETCH_ALBUMS: {
 			return {
 				...state,
-				albums: [...action.payload, ...state.albums]
+				albums: [...action.payload, ...state.albums],
+				albumProgress: action.albumProgress
 			};
 		}
 		default: {
