@@ -49,6 +49,17 @@ export const addAlbumToFolderToLocalStorage = (folder, album) => {
 	return folders;
 };
 
+export const removeAlbumFromFolderInLocalStorage = (albumId, folderName) => {
+	const folders = getFoldersFromLocalStorage();
+	const names = folders.map(each => each.name);
+	const folderIndex = names.indexOf(folderName);
+	const albumIds = folders[folderIndex].albums.map(each => each.id);
+	const albumIndex = albumIds.indexOf(albumId);
+	folders[folderIndex].albums.splice(albumIndex, 1);
+	setFoldersToLocalStorage(folders);
+	return folders;
+};
+
 export const mapAlbumData = (album) => {
 	return {
 		name: album.album.name,

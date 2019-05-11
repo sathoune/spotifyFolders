@@ -1,8 +1,16 @@
-import {ADD_FOLDER, REMOVE_FOLDER, FETCH_FOLDERS, ERROR, ADD_ALBUM_TO_FOLDER} from "./actionTypes";
+import {
+	ADD_FOLDER,
+	REMOVE_FOLDER,
+	FETCH_FOLDERS,
+	ERROR,
+	ADD_ALBUM_TO_FOLDER,
+	REMOVE_ALBUM_FROM_FOLDER
+} from "./actionTypes";
 import {
 	addAlbumToFolderToLocalStorage,
 	addFolderToLocalStorage,
 	getFoldersFromLocalStorage,
+	removeAlbumFromFolderInLocalStorage,
 	setFoldersToLocalStorage
 } from "../../functions";
 
@@ -56,6 +64,14 @@ export const addAlbumToFolder = (folder, albumData) => dispatch => {
 	const modifiedFolders = addAlbumToFolderToLocalStorage(folder, albumData);
 	dispatch({
 		type: ADD_ALBUM_TO_FOLDER,
+		payload: modifiedFolders
+	})
+};
+
+export const removeAlbumFromFolder = (albumId, folder) => dispatch => {
+	const modifiedFolders = removeAlbumFromFolderInLocalStorage(albumId, folder);
+	dispatch({
+		type: REMOVE_ALBUM_FROM_FOLDER,
 		payload: modifiedFolders
 	})
 };

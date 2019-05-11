@@ -26,7 +26,13 @@ const Folder = (props) => {
 				<button onClick={handleRemoveFolderClick}>Remove me!</button>
 			</div>
 			<div className="foldered-album-container hidden">
-				{props.data.albums.map((album, i) => <FolderedAlbum key={`foldered-${i}-${album.id}`} album={album}/>)}
+				{props.data.albums.map((album, i) => (
+					<FolderedAlbum
+						key={`foldered-${i}-${album.id}`}
+						folderName={props.data.id}
+						album={album}
+					/>)
+				)}
 			</div>
 		</div>
 	)

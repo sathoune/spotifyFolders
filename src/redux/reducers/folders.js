@@ -1,13 +1,20 @@
-import {ADD_FOLDER, FETCH_FOLDERS, REMOVE_FOLDER, ADD_ALBUM_TO_FOLDER} from "../actions/actionTypes";
+import {
+	ADD_FOLDER,
+	FETCH_FOLDERS,
+	REMOVE_FOLDER,
+	ADD_ALBUM_TO_FOLDER,
+	REMOVE_ALBUM_FROM_FOLDER
+} from "../actions/actionTypes";
 
 export const initialState = {
 	folders: []
 };
 
-export const folderReducer = (state=initialState, action) => {
-	switch(action.type) {
+export const folderReducer = (state = initialState, action) => {
+	switch (action.type) {
 		case ADD_FOLDER: {
-			return {...state,
+			return {
+				...state,
 				folders: [action.payload.folder, ...state.folders]
 			};
 		}
@@ -23,12 +30,19 @@ export const folderReducer = (state=initialState, action) => {
 				folders: [...action.payload.folders]
 			}
 		}
-		case ADD_ALBUM_TO_FOLDER : {
+		case ADD_ALBUM_TO_FOLDER: {
 			return {
 				...state,
 				folders: [...action.payload]
 			}
 		}
-		default: return state;
+		case REMOVE_ALBUM_FROM_FOLDER: {
+			return {
+				...state,
+				folders: [...action.payload]
+			}
+		}
+		default:
+			return state;
 	}
 };

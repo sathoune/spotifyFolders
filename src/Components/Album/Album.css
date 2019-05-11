@@ -1,13 +1,10 @@
 .album {
-    align-self: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .album-name, .album-artist {
-    text-align: left;
-}
-
-.album-add-to-folder {
-    float: right;
+    text-align: center;
 }
 
 img {

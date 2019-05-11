@@ -1,5 +1,6 @@
 .folder {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-self: center;
 }
