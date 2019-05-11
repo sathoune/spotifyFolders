@@ -14,11 +14,6 @@ class App extends Component {
 		super(props);
 		this.props.fetchFolders();
 	}
-	//
-	// setFolders(folders) {
-	// 	this.setState({folders: folders});
-	// 	localStorage.setItem("folders", JSON.stringify(folders));
-	// }
 	
 	componentDidMount() {
 		this.props.getToken();

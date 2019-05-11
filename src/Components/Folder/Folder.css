@@ -8,6 +8,14 @@
     text-align: left;
 }
 
+.foldered-album-container {
+    display: flex;
+}
+
+.hidden{
+    visibility: hidden;
+}
+
 img {
     outline: 0;
     max-width: 100%;

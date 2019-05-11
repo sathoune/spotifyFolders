@@ -1,5 +1,5 @@
 import React from 'react';
-import Album from "../Album/Album";
+import FolderlessAlbum from "../Album/FolderlessAlbum";
 import "./AlbumContainer.css";
 import {connect} from 'react-redux';
 import SelectFolder from "../SelectFolder/SelectFolder";
@@ -9,8 +9,8 @@ const AlbumContainer = props => {
 	return (
 		<div className="album-container">{
 			props.albums.map(album => (
-				<Album
-					key={album.id}
+				<FolderlessAlbum
+					key={"folderless-" + album.id}
 					album={album}
 					children={folderSelector}
 				/>

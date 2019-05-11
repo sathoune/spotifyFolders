@@ -1,5 +1,10 @@
 import {ADD_FOLDER, REMOVE_FOLDER, FETCH_FOLDERS, ERROR, ADD_ALBUM_TO_FOLDER} from "./actionTypes";
-import {addFolderToLocalStorage, getFoldersFromLocalStorage, setFoldersToLocalStorage} from "../../functions";
+import {
+	addAlbumToFolderToLocalStorage,
+	addFolderToLocalStorage,
+	getFoldersFromLocalStorage,
+	setFoldersToLocalStorage
+} from "../../functions";
 
 export const addFolder = (folder) => dispatch => {
 	
@@ -48,13 +53,9 @@ export const removeFolder = folderId => dispatch => {
 };
 
 export const addAlbumToFolder = (folder, albumData) => dispatch => {
-	console.log(folder);
-	console.log(albumData);
+	const modifiedFolders = addAlbumToFolderToLocalStorage(folder, albumData);
 	dispatch({
 		type: ADD_ALBUM_TO_FOLDER,
-		payload: {
-			folder: folder,
-			album: albumData
-		}
+		payload: modifiedFolders
 	})
 };

@@ -40,6 +40,15 @@ export const addFolderToLocalStorage = (folderCandidate) => {
 	}
 };
 
+export const addAlbumToFolderToLocalStorage = (folder, album) => {
+	const folders = getFoldersFromLocalStorage();
+	const names = folders.map(each => each.name);
+	const folderIndexInLocalStorage = names.indexOf(folder);
+	folders[folderIndexInLocalStorage].albums.push(album);
+	setFoldersToLocalStorage(folders);
+	return folders;
+};
+
 export const mapAlbumData = (album) => {
 	return {
 		name: album.album.name,

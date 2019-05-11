@@ -25,11 +25,10 @@ export const folderReducer = (state=initialState, action) => {
 		}
 		case ADD_ALBUM_TO_FOLDER : {
 			return {
-				...state
+				...state,
+				folders: [...action.payload]
 			}
 		}
-		
-		
 		default: return state;
 	}
 };
