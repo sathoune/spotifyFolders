@@ -3,9 +3,9 @@ import "./Folder.css";
 import {connect} from "react-redux";
 import {removeFolder} from "../../redux/actions/folderActions";
 import FolderedAlbum from "../Album/FolderedAlbum";
+import {toggleClass} from "../../functions";
 
 const Folder = (props) => {
-	console.log(props.data.albums);
 	const handleRemoveFolderClick = ({target}) => {
 		const targetId = (target.parentElement.id.replace("folder-", ""));
 		props.removeFolder(targetId);
@@ -14,13 +14,7 @@ const Folder = (props) => {
 	const handleExpandFolderClick = ({target}) => {
 		const toggleableClass = "hidden";
 		const albumContainer = target.parentElement.parentElement.nextElementSibling;
-		const classList = albumContainer.className.split(" ");
-		const toggleableClassIndex = classList.indexOf(toggleableClass);
-		
-		if(toggleableClassIndex === -1) classList.push(toggleableClass);
-		else classList.splice(toggleableClassIndex);
-		
-		albumContainer.className = classList.join(" ");
+		toggleClass(albumContainer, toggleableClass);
 	};
 	
 	return (

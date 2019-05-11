@@ -58,3 +58,13 @@ export const mapAlbumData = (album) => {
 		img: album.album.images[1].url
 	}
 };
+
+export const toggleClass = (target, className) => {
+	const classList = target.className.split(" ");
+	const classIndex = classList.indexOf(className);
+	
+	if(classIndex === -1) classList.push(className);
+	else classList.splice(className);
+	
+	target.className = classList.join(" ");
+};
