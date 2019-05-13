@@ -15,6 +15,7 @@
 
 .hidden{
     visibility: hidden;
+    height: 0;
 }
 
 img {

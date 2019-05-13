@@ -7,24 +7,22 @@ import {
 	REMOVE_ALBUM_FROM_FOLDER
 } from "./actionTypes";
 import {
-	addAlbumToFolderToLocalStorage,
-	addFolderToLocalStorage,
-	getFoldersFromLocalStorage,
-	removeAlbumFromFolderInLocalStorage,
-	setFoldersToLocalStorage
+	addAlbumToFolderInAPI,
+	addFolderToAPI,
+	getFoldersFromAPI,
+	removeAlbumFromFolderInAPI, removeFolderFromAPI,
 } from "../../functions";
 
 export const addFolder = (folder) => dispatch => {
 	
-	const result = addFolderToLocalStorage(folder);
-	
+	const result = addFolderToAPI(folder);
 	if (result.code === 201) {
 		dispatch({
 			type: ADD_FOLDER,
 			payload: {
 				folder: result.body
 			}
-		})
+		});
 	} else if (result.code >= 400 && result.code < 500) {
 		console.log(result.err);
 		dispatch({
@@ -35,43 +33,66 @@ export const addFolder = (folder) => dispatch => {
 		dispatch({
 			type: ERROR,
 			payload: "Unknown code"
-		})
+		});
 	}
 };
 
-export const fetchFolders = () => dispatch => {
-	const folders = getFoldersFromLocalStorage();
+export const fetchFolders = () => (dispatch) => {
+	const folders = getFoldersFromAPI();
 	dispatch({
 		type: FETCH_FOLDERS,
 		payload: folders
-	})
+	});
 };
 
 export const removeFolder = folderId => dispatch => {
-	const folders = getFoldersFromLocalStorage();
-	const filteredFolders = folders.filter(folder => folder.id !== folderId)
-	setFoldersToLocalStorage(filteredFolders);
-	
 	dispatch({
 		type: REMOVE_FOLDER,
 		payload: {
-			folders: filteredFolders
+			folders: removeFolderFromAPI(folderId)
 		}
-	})
+	});
 };
 
 export const addAlbumToFolder = (folder, albumData) => dispatch => {
-	const modifiedFolders = addAlbumToFolderToLocalStorage(folder, albumData);
-	dispatch({
-		type: ADD_ALBUM_TO_FOLDER,
-		payload: modifiedFolders
-	})
+	const result = addAlbumToFolderInAPI(folder, albumData);
+	if (result.code === 201) {
+		dispatch({
+			type: ADD_ALBUM_TO_FOLDER,
+			payload: result.folders
+		});
+	} else if (result.code >= 400 && result.code < 500) {
+		console.log(result.err);
+		dispatch({
+			type: ERROR,
+			payload: result.err
+		});
+	} else {
+		dispatch({
+			type: ERROR,
+			payload: "Unknown code"
+		});
+	}
 };
 
 export const removeAlbumFromFolder = (albumId, folder) => dispatch => {
-	const modifiedFolders = removeAlbumFromFolderInLocalStorage(albumId, folder);
-	dispatch({
-		type: REMOVE_ALBUM_FROM_FOLDER,
-		payload: modifiedFolders
-	})
+	const result = removeAlbumFromFolderInAPI(albumId, folder);
+	
+	if (result.code === 200) {
+		dispatch({
+			type: REMOVE_ALBUM_FROM_FOLDER,
+			payload: result.folders
+		});
+	} else if (result.code >= 400 && result.code < 500) {
+		console.log(result.err);
+		dispatch({
+			type: ERROR,
+			payload: result.err
+		});
+	} else {
+		dispatch({
+			type: ERROR,
+			payload: "Unknown code"
+		});
+	}
 };

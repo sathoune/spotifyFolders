@@ -1,4 +1,4 @@
-export const getFoldersFromLocalStorage = () => {
+export const getFoldersFromAPI = () => {
 	return (localStorage.hasOwnProperty("folders")) ? (
 		JSON.parse(localStorage.getItem("folders"))
 	) : (
@@ -9,15 +9,16 @@ export const getFoldersFromLocalStorage = () => {
 	)
 };
 
-export const setFoldersToLocalStorage = (foldersArray) => {
+export const setFoldersToAPI = (foldersArray) => {
 	localStorage.setItem("folders", JSON.stringify(foldersArray));
+	return foldersArray;
 };
 
-export const addFolderToLocalStorage = (folderCandidate) => {
+export const addFolderToAPI = (folderCandidate) => {
 	if (folderCandidate === "") {
 		return {err: "No name provided", code: 400}
 	} else {
-		const folders = getFoldersFromLocalStorage();
+		const folders = getFoldersFromAPI();
 		const names = folders.map(each => each.name);
 		if (names.indexOf(folderCandidate) === -1) {
 			const newFolder = {
@@ -26,7 +27,6 @@ export const addFolderToLocalStorage = (folderCandidate) => {
 				albums: []
 			};
 			folders.unshift(newFolder);
-			setFoldersToLocalStorage(folders);
 			return {
 				code: 201,
 				body: newFolder
@@ -40,24 +40,54 @@ export const addFolderToLocalStorage = (folderCandidate) => {
 	}
 };
 
-export const addAlbumToFolderToLocalStorage = (folder, album) => {
-	const folders = getFoldersFromLocalStorage();
-	const names = folders.map(each => each.name);
-	const folderIndexInLocalStorage = names.indexOf(folder);
-	folders[folderIndexInLocalStorage].albums.push(album);
-	setFoldersToLocalStorage(folders);
-	return folders;
+export const removeFolderFromAPI = folderId => {
+	const folders = getFoldersFromAPI();
+	const filteredFolders = folders.filter(folder => folder.id !== folderId)
+	return setFoldersToAPI(filteredFolders);
 };
 
-export const removeAlbumFromFolderInLocalStorage = (albumId, folderName) => {
-	const folders = getFoldersFromLocalStorage();
+export const addAlbumToFolderInAPI = (folder, album) => {
+	const folders = getFoldersFromAPI();
+	
+	const names = folders.map(each => each.name);
+	const folderIndexInAPI = names.indexOf(folder);
+	const albums = folders[folderIndexInAPI].albums;
+	const inAlbums = albums.filter(each => each.id === album.id);
+	
+	if(inAlbums.length === 0) {
+		folders[folderIndexInAPI].albums.push(album);
+		return {
+			code: 201,
+			folders
+		};
+	} else {
+		return {
+			code: 400,
+			msg: "Album already in folder"
+		}
+	}
+};
+
+export const removeAlbumFromFolderInAPI = (albumId, folderName) => {
+	const folders = getFoldersFromAPI();
+	
 	const names = folders.map(each => each.name);
 	const folderIndex = names.indexOf(folderName);
 	const albumIds = folders[folderIndex].albums.map(each => each.id);
 	const albumIndex = albumIds.indexOf(albumId);
-	folders[folderIndex].albums.splice(albumIndex, 1);
-	setFoldersToLocalStorage(folders);
-	return folders;
+	
+	if(albumIndex !== -1){
+		folders[folderIndex].albums.splice(albumIndex, 1);
+		return {
+			code: 200,
+			folders
+		};
+	} else {
+		return {
+			code: 400,
+			msg: "Album not in the folder"
+		};
+	}
 };
 
 export const mapAlbumData = (album) => {

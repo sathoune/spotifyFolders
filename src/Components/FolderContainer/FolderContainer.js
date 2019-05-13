@@ -3,21 +3,25 @@ import "./FolderContainer.css"
 import Folder from "../Folder/Folder";
 import FolderCreator from "../FolderCreator/FolderCreator";
 import {connect} from "react-redux";
+import {setFoldersToAPI} from "../../functions";
 
 const FolderContainer = props => {
 	
-	return (
-		<div className="folder-container">
-			<FolderCreator/>
-			<div id={"folders"}>
-				{props.folders.map((folder) => (
-					<Folder
-						key={"folder" + folder.id}
-						data={folder}
-					/>)
-				)}
-			</div>
-		</div>)
+	setFoldersToAPI(props.folders);
+	return ((props) => {
+		return (
+			<div className="folder-container">
+				<FolderCreator/>
+				<div id={"folders"}>
+					{props.folders.map((folder) => (
+						<Folder
+							key={"folder" + folder.id}
+							data={folder}
+						/>)
+					)}
+				</div>
+			</div>)
+	})(props);
 };
 
 const mapStateToProps = (state) => ({

@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {useEffect} from "react";
 import "./App.css";
 import Login from "../Login/Login";
 import AlbumContainer from "../AlbumContainer/AlbumContainer";
@@ -9,42 +9,37 @@ import {connect} from "react-redux";
 import {getToken} from "../../redux/actions/appActions";
 import {fetchAlbums} from "../../redux/actions/albumActions";
 
-class App extends Component {
-	constructor(props) {
-		super(props);
-		this.props.fetchFolders();
-	}
+const App = props => {
+	useEffect(() => {
+		props.fetchFolders();
+		props.getToken();
+	}, []);
 	
-	componentDidMount() {
-		this.props.getToken();
-		setTimeout(() => {
-			if (this.props.token) {
-				this.props.fetchAlbums({token: this.props.token});
-			}
-		}, 1000);
-	}
-
-	render() {
-		if (this.props.token && this.props.albumProgress === 100) {
-			return (
-				<div className="App container">
-					<AlbumContainer albums={this.props.albums} folders={this.props.folders}/>
-					<FolderContainer/>
-				</div>
-			)
-		} else if (this.props.token && this.props.albumProgress !== 100) {
-			return (
-				<div className="App">
-					<AlbumFetchingPlaceholder fetched={this.props.albumProgress}/>
-				</div>
-			)
-		} else {
-			return (
-				<div className="App">
-					<Login/>
-				</div>
-			)
+	useEffect(() => {
+		if (props.token) {
+			props.fetchAlbums({token: props.token});
 		}
+	}, [props.token]);
+	
+	if (props.token && props.albumProgress === 100) {
+		return (
+			<div className="App container">
+				<AlbumContainer albums={props.albums} folders={props.folders}/>
+				<FolderContainer/>
+			</div>
+		)
+	} else if (props.token && props.albumProgress !== 100) {
+		return (
+			<div className="App">
+				<AlbumFetchingPlaceholder fetched={props.albumProgress}/>
+			</div>
+		)
+	} else {
+		return (
+			<div className="App">
+				<Login/>
+			</div>
+		)
 	}
 }
 
@@ -54,4 +49,7 @@ const mapStateToProps = (state) => ({
 	albumProgress: state.albums.albumProgress
 });
 
-export default connect(mapStateToProps, {fetchFolders, getToken, fetchAlbums})(App);
+export default connect(
+	mapStateToProps,
+	{fetchFolders, getToken, fetchAlbums}
+)(App);

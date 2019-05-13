@@ -15,7 +15,7 @@ export const folderReducer = (state = initialState, action) => {
 		case ADD_FOLDER: {
 			return {
 				...state,
-				folders: [action.payload.folder, ...state.folders]
+				folders: [...action.payload.folder, ...state.folders]
 			};
 		}
 		case FETCH_FOLDERS: {

@@ -6,10 +6,7 @@ import FolderedAlbum from "../Album/FolderedAlbum";
 import {toggleClass} from "../../functions";
 
 const Folder = (props) => {
-	const handleRemoveFolderClick = ({target}) => {
-		const targetId = (target.parentElement.id.replace("folder-", ""));
-		props.removeFolder(targetId);
-	};
+	const handleRemoveFolderClick = () => props.removeFolder(props.data.id);
 	
 	const handleExpandFolderClick = ({target}) => {
 		const toggleableClass = "hidden";
@@ -21,9 +18,13 @@ const Folder = (props) => {
 		<div id={`folder-${props.data.id}`} className="folder">
 			<div>
 				<div className={"folder-name"}>
-					<strong onClick={handleExpandFolderClick}>{props.data.name}</strong>
+					<strong onClick={handleExpandFolderClick}>
+						{props.data.name}
+					</strong>
 				</div>
-				<button onClick={handleRemoveFolderClick}>Remove me!</button>
+				<button onClick={handleRemoveFolderClick}>
+					Remove folder!
+				</button>
 			</div>
 			<div className="foldered-album-container hidden">
 				{props.data.albums.map((album, i) => (
