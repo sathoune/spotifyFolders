@@ -1,16 +1,17 @@
 import {
 	ADD_FOLDER,
+	SET_FOLDERS,
 	REMOVE_FOLDER,
 	FETCH_FOLDERS,
 	ERROR,
 	ADD_ALBUM_TO_FOLDER,
-	REMOVE_ALBUM_FROM_FOLDER
+	REMOVE_ALBUM_FROM_FOLDER, REMOVE_FOLDERS
 } from "./actionTypes";
 import {
 	addAlbumToFolderInAPI,
 	addFolderToAPI,
 	getFoldersFromAPI,
-	removeAlbumFromFolderInAPI, removeFolderFromAPI,
+	removeAlbumFromFolderInAPI, removeFolderFromAPI, setFoldersToAPI,
 } from "../../functions";
 
 export const addFolder = (folder) => dispatch => {
@@ -95,4 +96,20 @@ export const removeAlbumFromFolder = (albumId, folder) => dispatch => {
 			payload: "Unknown code"
 		});
 	}
+};
+
+export const setFolders = folders => dispatch => {
+	setFoldersToAPI(folders);
+	dispatch({
+		type: SET_FOLDERS,
+		payload: folders
+	})
+};
+
+export const removeFolders = () => dispatch => {
+	setFoldersToAPI([]);
+	dispatch({
+		type: REMOVE_FOLDERS,
+		payload: []
+	});
 };

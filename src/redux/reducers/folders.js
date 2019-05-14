@@ -3,7 +3,7 @@ import {
 	FETCH_FOLDERS,
 	REMOVE_FOLDER,
 	ADD_ALBUM_TO_FOLDER,
-	REMOVE_ALBUM_FROM_FOLDER
+	REMOVE_ALBUM_FROM_FOLDER, SET_FOLDERS, REMOVE_FOLDERS
 } from "../actions/actionTypes";
 
 export const initialState = {
@@ -40,6 +40,20 @@ export const folderReducer = (state = initialState, action) => {
 			return {
 				...state,
 				folders: [...action.payload]
+			}
+		}
+		
+		case SET_FOLDERS: {
+			return {
+				...state,
+				folders: [...action.payload]
+			}
+		}
+		
+		case REMOVE_FOLDERS: {
+			return {
+				...state,
+				folders: []
 			}
 		}
 		default:
