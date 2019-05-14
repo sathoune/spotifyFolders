@@ -1,0 +1,25 @@
+#welcome {
+    font-family: "Courier New", Arial, serif;
+    text-align: justify;
+    width: 100%;
+}
+
+@media screen and (min-width: 720px){
+    #welcome {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    #welcome {
+        width: 60%;
+    }
+}
+
+main {
+    font-size: 0.8em;
+}
+
+#sign {
+    text-align: right;
+}

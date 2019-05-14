@@ -12,6 +12,7 @@ import {getToken, setDemo} from "../../redux/actions/appActions";
 import {fetchAlbums} from "../../redux/actions/albumActions";
 import Footer from "../Footer/Footer";
 import Demo from "../Demo/Demo";
+import demoData from "../../demoData";
 
 const App = props => {
 	useEffect(() => {
@@ -41,7 +42,13 @@ const App = props => {
 			</div>
 		)
 	} else if(props.demo) {
-		return (<Demo />);
+		return (
+			<div className="App container">
+			<Header/>
+			<AlbumContainer albums={demoData} folders={[]}/>
+			<FolderContainer/>
+			<Footer/>
+		</div>);
 	} else {
 		return (
 			<div className="App">
@@ -49,11 +56,12 @@ const App = props => {
 					<Welcome />
 					<Login/>
 					<button onClick={props.setDemo} className={"btn"}>Take me to demo!</button>
+					<Footer/>
 				</div>
 			</div>
 		)
 	}
-}
+};
 
 const mapStateToProps = (state) => ({
 	token: state.app.token,

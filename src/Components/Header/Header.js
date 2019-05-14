@@ -80,7 +80,6 @@ const Header = (props) => {
 		<header>
 			<button className="header-btn" onClick={toggleVisibilityOfAlbums}>hide albums</button>
 			<button className="header-btn" onClick={toggleVisibilityOfFolders}>hide folders</button>
-			This is header
 			<button className="remove-btn" onClick={handleRemoveFoldersClick}>remove my folders</button>
 			<button className="download-btn" onClick={handleUploadFoldersClick}>upload my folders</button>
 			<input
