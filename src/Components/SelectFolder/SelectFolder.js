@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 
 const SelectFolder = (props) => {
 	return (
-		<select>
+		<select className="folder-selection">
 			{props.folders.map((folder, i) => <option key={i}>{folder.name}</option>)}
 		</select>
 	)

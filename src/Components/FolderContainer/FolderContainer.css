@@ -7,6 +7,10 @@
     align-self: flex-start;
 }
 
+#folder-creator {
+    justify-content: flex-end;
+}
+
 @media screen and (min-width: 720px){
     .folder-container {
         width: 33%;

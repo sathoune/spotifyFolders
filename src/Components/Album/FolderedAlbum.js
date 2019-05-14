@@ -12,11 +12,10 @@ const FolderedAlbum = (props) => {
 	};
 	
 	const removeFromFolderContainer = (
-		<div>
-			<button onClick={handleRemoveAlbumFromFolderClick}>
-				Remove from folder
-			</button>
-		</div>
+		<button onClick={handleRemoveAlbumFromFolderClick}>
+			Remove from folder
+		</button>
+		
 	)
 	return (<Album
 		{...props}

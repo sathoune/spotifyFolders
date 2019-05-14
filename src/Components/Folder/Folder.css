@@ -2,15 +2,20 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     align-self: center;
 }
 
-.folder-name{
-    text-align: left;
+.folder-name {
+    max-width: 250px;
+    word-break: break-word;
+    align-self: center;
 }
 
 .foldered-album-container {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .hidden{

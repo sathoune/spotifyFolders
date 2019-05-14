@@ -4,23 +4,45 @@ import {getFoldersFromAPI, toggleClass} from "../../functions";
 
 const toggleVisibilityOfAlbums = ({target}) => {
 	const albumContainer = document.getElementById("album-container");
-	const className = "hidden";
-	toggleClass(albumContainer, className);
-	if(target.innerHTML === "hide albums") target.innerHTML = "show albums";
-	else target.innerHTML = "hide albums";
+	const folderContainer = document.getElementById("folder-container");
+	const hiddenClass = "hidden";
+	toggleClass(albumContainer, hiddenClass);
+	if(target.innerHTML === "hide albums") {
+		target.innerHTML = "show albums";
+		folderContainer.style.width = "100%";
+	}
+	else {
+		target.innerHTML = "hide albums";
+		folderContainer.style.width= "";
+	}
 };
 
 const toggleVisibilityOfFolders = ({target}) => {
-	const albumContainer = document.getElementById("folder-container");
+	const folderContainer = document.getElementById("folder-container");
+	const albumContainer = document.getElementById("album-container");
 	const className = "hidden";
-	toggleClass(albumContainer, className);
-	if(target.innerHTML === "hide folders") target.innerHTML = "show folders";
-	else target.innerHTML = "hide folders";
+	toggleClass(folderContainer, className);
+	if(target.innerHTML === "hide folders") {
+		target.innerHTML = "show folders";
+		albumContainer.style.width = "100%";
+	}
+	else {
+		target.innerHTML = "hide folders";
+		albumContainer.style.width = "";
+	}
 };
 
-const downLoadFolders = () => {
+const downloadFolders = () => {
 	const folders = getFoldersFromAPI();
 	downloadObjectAsJson(folders, "myFolders");
+};
+
+const removeFolders = () => {
+
+};
+
+const uploadFolders = () => {
+
 };
 
 function downloadObjectAsJson(exportObj, exportName){
@@ -39,7 +61,9 @@ const Header = () => {
 			<button className="header-btn" onClick={toggleVisibilityOfAlbums}>hide albums</button>
 			<button className="header-btn" onClick={toggleVisibilityOfFolders}>hide folders</button>
 			This is header
-			<button className="download-btn" onClick={downLoadFolders}>download folders</button>
+			<button className="remove-btn" onClick={removeFolders}>remove my folders</button>
+			<button className="download-btn" onClick={uploadFolders}>upload my folders</button>
+			<button className="download-btn" onClick={downloadFolders}>download my folders</button>
 		</header>
 	)
 };

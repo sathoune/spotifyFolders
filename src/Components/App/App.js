@@ -9,6 +9,7 @@ import {fetchFolders} from "../../redux/actions/folderActions";
 import {connect} from "react-redux";
 import {getToken} from "../../redux/actions/appActions";
 import {fetchAlbums} from "../../redux/actions/albumActions";
+import Footer from "../Footer/Footer";
 
 const App = props => {
 	useEffect(() => {
@@ -28,6 +29,7 @@ const App = props => {
 				<Header />
 				<AlbumContainer albums={props.albums} folders={props.folders}/>
 				<FolderContainer/>
+				<Footer/>
 			</div>
 		)
 	} else if (props.token && props.albumProgress !== 100) {

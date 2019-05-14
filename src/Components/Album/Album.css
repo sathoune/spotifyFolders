@@ -1,9 +1,11 @@
 .album {
     display: flex;
     flex-direction: column;
+    margin: 1%;
 }
 
 .album-name, .album-artist {
+    width: 100%;
     text-align: center;
 }
 
@@ -11,4 +13,8 @@ img {
     outline: 0;
     max-width: 100%;
     height: auto;
+}
+
+.folder-selection {
+    max-width: 250px;
 }

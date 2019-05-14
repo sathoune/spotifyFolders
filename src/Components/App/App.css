@@ -1,5 +1,9 @@
 .App {
+    height: 100%;
     text-align: center;
+    display: flex;
+    align-content: flex-start;
+    justify-content: center;
 }
 
 .App-link {
@@ -12,7 +16,7 @@
     padding: 0;
 }
 
-html, body {
+html, body, #root {
     height: 100%;
 }
 
@@ -25,9 +29,8 @@ body {
 
 /** Buttons **/
 .btn {
-
-    position: relative;
-    top: 50%;
+    align-self: center;
+    justify-self: center;
     background-color: transparent;
     border-radius: 2em;
     border: 0.2em solid #1ecd97;
