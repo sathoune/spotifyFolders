@@ -1,9 +1,8 @@
-import {GET_TOKEN} from "../actions/actionTypes";
+import {GET_TOKEN, SET_DEMO} from "../actions/actionTypes";
 
 export const initialState = {
 	token: null,
-	albums: [],
-	albumProgress: 0,
+	demo: false
 };
 
 export const appReducer = (state = initialState, action) => {
@@ -12,6 +11,13 @@ export const appReducer = (state = initialState, action) => {
 			return {
 				...state,
 				token: action.payload.token
+			}
+		}
+		
+		case SET_DEMO: {
+			return {
+				...state,
+				demo: !state.demo
 			}
 		}
 		default:

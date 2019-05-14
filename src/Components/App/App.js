@@ -2,14 +2,16 @@ import React, {useEffect} from "react";
 import "./App.css";
 import Login from "../Login/Login";
 import Header from "../Header/Header";
+import Welcome from "../Welcome/Welcome";
 import AlbumContainer from "../AlbumContainer/AlbumContainer";
 import AlbumFetchingPlaceholder from "../AlbumContainer/AlbumContainerPlaceholder";
 import FolderContainer from "../FolderContainer/FolderContainer";
 import {fetchFolders} from "../../redux/actions/folderActions";
 import {connect} from "react-redux";
-import {getToken} from "../../redux/actions/appActions";
+import {getToken, setDemo} from "../../redux/actions/appActions";
 import {fetchAlbums} from "../../redux/actions/albumActions";
 import Footer from "../Footer/Footer";
+import Demo from "../Demo/Demo";
 
 const App = props => {
 	useEffect(() => {
@@ -38,10 +40,16 @@ const App = props => {
 				<AlbumFetchingPlaceholder fetched={props.albumProgress}/>
 			</div>
 		)
+	} else if(props.demo) {
+		return (<Demo />);
 	} else {
 		return (
 			<div className="App">
-				<Login/>
+				<div className="container-column">
+					<Welcome />
+					<Login/>
+					<button onClick={props.setDemo} className={"btn"}>Take me to demo!</button>
+				</div>
 			</div>
 		)
 	}
@@ -50,10 +58,11 @@ const App = props => {
 const mapStateToProps = (state) => ({
 	token: state.app.token,
 	albums: state.albums.albums,
-	albumProgress: state.albums.albumProgress
+	albumProgress: state.albums.albumProgress,
+	demo: state.app.demo
 });
 
 export default connect(
 	mapStateToProps,
-	{fetchFolders, getToken, fetchAlbums}
+	{fetchFolders, getToken, fetchAlbums, setDemo}
 )(App);

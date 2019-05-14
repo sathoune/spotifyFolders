@@ -7,7 +7,7 @@ export const SET_FOLDERS                = "SET_FOLDERS";
 export const REMOVE_FOLDERS             = "REMOVE_FOLDERS";
 
 export const FETCH_ALBUMS               = "FETCH_ALBUMS";
-
+export const SET_DEMO                   = "SET_DEMO";
 export const GET_TOKEN                  = "GET_TOKEN";
 
 export const ERROR                      = "ERROR";

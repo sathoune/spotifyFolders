@@ -1,4 +1,4 @@
-import {GET_TOKEN} from "./actionTypes";
+import {GET_TOKEN, SET_DEMO} from "./actionTypes";
 import hash from "../../hash";
 
 
@@ -9,5 +9,11 @@ export const getToken = () => dispatch => {
 		payload: {
 			token: _token
 		}
+	})
+};
+
+export const setDemo = () => dispatch => {
+	dispatch({
+		type: SET_DEMO
 	})
 };

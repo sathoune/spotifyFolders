@@ -3,32 +3,33 @@
     width: 100%;
     display: grid;
     grid-template-columns: auto;
+    align-content: start;
 }
 
-@media screen and (min-width: 720px){
+@media screen and (min-width: 650px){
     .album-container {
-        width: 66%;
+        width: 50%;
         order: 1;
         grid-template-columns: 100%;
         flex-grow: 1;
     }
 }
 
-@media screen and (min-width: 1080px){
+@media screen and (min-width: 950px){
     .album-container {
         grid-template-columns: 50% 50%;
         flex-grow: 2;
     }
 }
 
-@media screen and (min-width: 1440px){
+@media screen and (min-width: 1250px){
     .album-container {
         grid-template-columns: 33.33% 33.33% 33.33%;
         flex-grow: 3;
     }
 }
 
-@media screen and (min-width: 1800px){
+@media screen and (min-width: 1550px){
     .album-container {
         grid-template-columns: 25% 25% 25% 25%;
         flex-grow: 4;

@@ -2,12 +2,9 @@
     height: 100%;
     text-align: center;
     display: flex;
+    flex-wrap: wrap;
     align-content: flex-start;
     justify-content: center;
-}
-
-.App-link {
-    color: #61dafb;
 }
 
 * {
@@ -40,15 +37,12 @@ body {
     padding: 0.7em 1.5em;
     text-transform: uppercase;
     transition: all 0.25s ease;
+    margin: 1% auto;
 }
 
 .btn:hover {
     background: #1ecd97;
     color: #333;
-}
-
-.btn--login {
-    margin: 0 auto;
 }
 
 /** Background **/
@@ -75,9 +69,10 @@ body {
     z-index: 1;
 }
 
-.container {
+.container-column {
     align-items: center;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     height: 100%;
