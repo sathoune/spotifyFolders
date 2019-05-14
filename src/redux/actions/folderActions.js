@@ -20,7 +20,7 @@ export const addFolder = (folder) => dispatch => {
 		dispatch({
 			type: ADD_FOLDER,
 			payload: {
-				folder: result.body
+				folder: [result.body]
 			}
 		});
 	} else if (result.code >= 400 && result.code < 500) {

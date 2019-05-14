@@ -1,4 +1,14 @@
 header {
+    display: flex;
+    text-align: left;
     width: 100%;
     order: 0;
+}
+
+.header-btn {
+    padding: 5px;
+}
+
+.download-btn {
+    margin-left: auto;
 }

@@ -70,7 +70,6 @@ export const addAlbumToFolderInAPI = (folder, album) => {
 
 export const removeAlbumFromFolderInAPI = (albumId, folderName) => {
 	const folders = getFoldersFromAPI();
-	
 	const names = folders.map(each => each.name);
 	const folderIndex = names.indexOf(folderName);
 	const albumIds = folders[folderIndex].albums.map(each => each.id);
