@@ -11,9 +11,28 @@
     justify-content: flex-end;
 }
 
-@media screen and (min-width: 720px){
+@media screen and (min-width: 600px){
     .folder-container {
-        width: 33%;
+        width: 50%;
         order: 2;
+    }
+}
+
+
+@media screen and (min-width: 900px){
+    .folder-container {
+        width: 33.33%;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    .folder-container {
+        width: 25%;
+    }
+}
+
+@media screen and (min-width: 1500px){
+    .folder-container {
+        width: 20%;
     }
 }
