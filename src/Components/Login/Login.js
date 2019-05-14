@@ -6,10 +6,10 @@ const Login = () => {
 		"%20"
 	)}&response_type=token&show_dialog=true`;
 	return (
-		<a  className="btn btn--loginApp-link"
+		<a  className="btn btn--login App-link"
 			href={url}
 		>
-			Login to Spotify
+			Login with Spotify
 		</a>)
 };
 

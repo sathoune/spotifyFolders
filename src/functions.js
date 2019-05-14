@@ -104,8 +104,12 @@ export const toggleClass = (target, className) => {
 	const classList = target.className.split(" ");
 	const classIndex = classList.indexOf(className);
 	
-	if(classIndex === -1) classList.push(className);
-	else classList.splice(className);
+	if(classIndex === -1) {
+		classList.push(className);
+		target.className = classList.join(" ");
+	}
+	else {
+		target.className  = classList.splice(className, 1).join(" ");
+	}
 	
-	target.className = classList.join(" ");
 };

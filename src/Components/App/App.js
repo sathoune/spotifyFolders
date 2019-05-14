@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import "./App.css";
 import Login from "../Login/Login";
+import Header from "../Header/Header";
 import AlbumContainer from "../AlbumContainer/AlbumContainer";
 import AlbumFetchingPlaceholder from "../AlbumContainer/AlbumContainerPlaceholder";
 import FolderContainer from "../FolderContainer/FolderContainer";
@@ -24,6 +25,7 @@ const App = props => {
 	if (props.token && props.albumProgress === 100) {
 		return (
 			<div className="App container">
+				<Header />
 				<AlbumContainer albums={props.albums} folders={props.folders}/>
 				<FolderContainer/>
 			</div>

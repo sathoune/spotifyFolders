@@ -7,7 +7,7 @@ import SelectFolder from "../SelectFolder/SelectFolder";
 const AlbumContainer = props => {
 	const folderSelector = <SelectFolder/>;
 	return (
-		<div className="album-container">{
+		<div id="album-container" className="album-container">{
 			props.albums.map(album => (
 				<FolderlessAlbum
 					key={"folderless-" + album.id}

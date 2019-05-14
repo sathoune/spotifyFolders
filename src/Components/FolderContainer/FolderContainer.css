@@ -1,7 +1,15 @@
 .folder-container {
-    flex-grow: 1;
+    order: 1;
     width: 100%;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-self: flex-start;
+}
+
+@media screen and (min-width: 720px){
+    .folder-container {
+        width: 33%;
+        order: 2;
+    }
 }

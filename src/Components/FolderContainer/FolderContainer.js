@@ -10,7 +10,7 @@ const FolderContainer = props => {
 	setFoldersToAPI(props.folders);
 	return ((props) => {
 		return (
-			<div className="folder-container">
+			<div id="folder-container" className="folder-container">
 				<FolderCreator/>
 				<div id={"folders"}>
 					{props.folders.map((folder) => (
