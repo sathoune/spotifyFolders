@@ -1,7 +1,7 @@
 #welcome {
     font-family: "Courier New", Arial, serif;
     text-align: justify;
-    width: 100%;
+    width: 90%;
 }
 
 @media screen and (min-width: 720px){

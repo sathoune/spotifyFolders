@@ -50,13 +50,13 @@ const App = props => {
 		</div>);
 	} else {
 		return (
-			<div className="App">
-				<div className="container-column">
+			<div>
+				<div className="App container-column welcome">
 					<Welcome />
 					<Login/>
 					<button onClick={props.setDemo} className={"btn"}>Take me to demo!</button>
-					<Footer/>
 				</div>
+				<Footer/>
 			</div>
 		)
 	}

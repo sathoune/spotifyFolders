@@ -83,3 +83,8 @@ body {
 .main-container {
     flex: 1;
 }
+
+.welcome {
+    padding: 3% 5% 0 5%;
+    align-content: center;
+}

@@ -16,7 +16,7 @@ const Welcome = () => {
 				Right now it is very unpolished and quite cheaty
 				since project does not use any proper database to store your data but folder structure is saved in
 				browser's storage so it will not be available on other devices unless you will use
-				JSON file that site can let you download
+				JSON file that site can let you download and when you clear your browser data structure might be lost.
 			</p>
 			<br/>
 			<p>
