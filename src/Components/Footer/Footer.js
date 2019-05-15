@@ -3,10 +3,6 @@ import "./Footer.css"
 
 const Footer = () => {
 	
-	const toForm = () => {
-		window.open('https://forms.gle/z6XAwYTJbe36a9DH6', '_blank');
-	};
-	
 	return (
 		<footer id="footer">
 			<a

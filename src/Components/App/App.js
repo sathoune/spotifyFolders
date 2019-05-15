@@ -11,7 +11,6 @@ import {connect} from "react-redux";
 import {getToken, setDemo} from "../../redux/actions/appActions";
 import {fetchAlbums} from "../../redux/actions/albumActions";
 import Footer from "../Footer/Footer";
-import Demo from "../Demo/Demo";
 import demoData from "../../demoData";
 
 const App = props => {

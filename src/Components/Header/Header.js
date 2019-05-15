@@ -80,15 +80,15 @@ const Header = (props) => {
 		<header>
 			<button className="header-btn" onClick={toggleVisibilityOfAlbums}>hide albums</button>
 			<button className="header-btn" onClick={toggleVisibilityOfFolders}>hide folders</button>
-			<button className="remove-btn" onClick={handleRemoveFoldersClick}>remove my folders</button>
-			<button className="download-btn" onClick={handleUploadFoldersClick}>upload my folders</button>
+			<button className="header-btn remove-btn" onClick={handleRemoveFoldersClick}>remove my folders</button>
+			<button className="header-btn download-btn" onClick={handleUploadFoldersClick}>upload my folders</button>
 			<input
 				id="upload-folders"
 				style={{display: "none"}}
 				type="file"
 				onChange={uploadFile}
 			/>
-			<button className="download-btn" onClick={downloadFolders}>download my folders</button>
+			<button className="header-btn download-btn" onClick={downloadFolders}>download my folders</button>
 		</header>
 	)
 };

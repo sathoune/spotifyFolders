@@ -24,6 +24,7 @@ const FolderCreator = (props) => {
 				value={input}
 			/>
 			<button
+				className="header-btn"
 				onClick={createFolder}>
 				Create folder
 			</button>

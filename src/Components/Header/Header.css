@@ -8,7 +8,41 @@ header {
 
 .header-btn {
     padding: 5px;
+    background-color: transparent;
+    border: 0.2em solid #1ecd97;
+
+    color: #1ecd97;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+    margin: 0.5em;
 }
+
+.header-btn:hover {
+    background: #1ecd97;
+    color: #333;
+}
+
+.remove-btn{
+    color: #c60707;
+    border-color: #c60707;
+}
+
+.remove-btn:hover {
+    background: #c60707;
+    color: #000;
+}
+
+.download-btn {
+    color: #3068c1;
+    border-color: #3068c1;
+}
+
+.download-btn:hover {
+    background: #3068c1;
+    color: #FFFFFF;
+}
+
 
 .download-btn {
     float: right;

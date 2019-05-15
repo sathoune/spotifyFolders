@@ -22,7 +22,7 @@ const Folder = (props) => {
 						{props.data.name}
 					</strong>
 				</div>
-				<button onClick={handleRemoveFolderClick}>
+				<button className="header-btn remove-btn" onClick={handleRemoveFolderClick}>
 					Remove folder!
 				</button>
 			</div>

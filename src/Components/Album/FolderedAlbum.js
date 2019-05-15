@@ -12,7 +12,9 @@ const FolderedAlbum = (props) => {
 	};
 	
 	const removeFromFolderContainer = (
-		<button onClick={handleRemoveAlbumFromFolderClick}>
+		<button
+			className="header-btn remove-btn"
+			onClick={handleRemoveAlbumFromFolderClick}>
 			Remove from folder
 		</button>
 		
